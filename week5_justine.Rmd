@@ -1,3 +1,11 @@
+---
+title: "Week 5 Activity"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
 ```{r}
 # install.packages("tidyverse")
 library(tidyverse)
@@ -9,7 +17,7 @@ library(tidyverse)
 
 ```{r}
 #read dataset
-anscombe_quartet = readRDS(".../dataset/anscombe_quartet.rds")
+anscombe_quartet = readRDS("dataset/anscombe_quartet.rds")
 ```
 
 ## Explore the dataset
@@ -19,9 +27,7 @@ anscombe_quartet = readRDS(".../dataset/anscombe_quartet.rds")
 str(anscombe_quartet)
 ```
 
-What does the function str() do?
-
-:   to display the structure of the dataset
+-   What does the function str() do? : to display the structure of the dataset
 
 ## Summary statistics:
 
@@ -52,11 +58,11 @@ ggplot(anscombe_quartet, aes(x=x,y=y)) +  #plot dataset; default aesthetic mappi
   facet_wrap(~dataset)  #arrange plot into seperate panels based on dataset
 ```
 
--   Save the plot
+\*Save the plot
 
 ```{r}
 #save plot with specified format
-ggsave(".../dataset/anscombe_quartet.png", width = 20, height = 20, units = "cm")
+ggsave("anscombe_quartet.png", width = 20, height = 20, units = "cm")
 ```
 
 ## Question answers
@@ -85,7 +91,7 @@ The plots and summary statistics show that although there are similar summary st
 
 ```{r}
 #read dataset
-datasaurus_dozen = readRDS(".../dataset/datasaurus_dozen.rds")
+datasaurus_dozen = readRDS("dataset/datasaurus_dozen.rds")
 ```
 
 ## Dataset explored
@@ -95,7 +101,7 @@ datasaurus_dozen = readRDS(".../dataset/datasaurus_dozen.rds")
 str(datasaurus_dozen)
 ```
 
-\*how many rows and columns does the datasaurus_dozen file have? rows = 1,846 rows columns = 3 columns
+-   how many rows and columns does the datasaurus_dozen file have? rows = 1,846 rows columns = 3 columns
 
 ## Dataset Plot
 
@@ -140,7 +146,7 @@ ggplot(datasaurus_dozen, aes(x=x,y=y)) +  #plot dataset; default aesthetic mappi
 
 ```{r}
 #save plot with specified format
-ggsave(".../dataset/datasaurus_dozen.png", width = 20, height = 20, units = "cm")
+ggsave("../plots/datasaurus_dozen.png", width = 20, height = 20, units = "cm")
 ```
 
 ## Conclusions:
