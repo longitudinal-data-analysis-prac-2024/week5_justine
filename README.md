@@ -1,30 +1,22 @@
+# **Week 5 Activity**
 
-```{r}
-# install.packages("tidyverse")
-library(tidyverse)
-```
-
-# PROBLEM 1
+## **PROBLEM 1**
 
 > Lets look at the Anscombe’s Quartet data. There are four different data sets. Anscombe, F. J. (1973). "Graphs in Statistical Analysis". American Statistician. 27 (1): 17–21. <doi:10.1080/00031305.1973.10478966>. JSTOR 2682899.
 
-```{r}
+Read the Data Set and Explored:
+
+```         
 #read dataset
 anscombe_quartet = readRDS("dataset/anscombe_quartet.rds")
-```
-
-## Explore the dataset
-
-```{r}
-#show dataset structure
 str(anscombe_quartet)
 ```
 
 -   What does the function str() do? : to display the structure of the dataset
 
-## Summary statistics:
+### Summary statistics: to calculate the mean, minimum, maximum and correlation coefficients for x and y
 
-```{r}
+```         
 anscombe_quartet %>% 
   group_by(dataset) %>% #group dataset based on 'dataset'
   summarise(
@@ -38,11 +30,9 @@ anscombe_quartet %>%
   )
 ```
 
--   What do the summary statistics tell us about the different datasets? The different datasets have similar summary statistics but are different in specific ways where each data set has the same mean for x and similar means for y, suggesting similarity in the datasets for central tendancy. The minimum x value is also the same for dataset_1, 2 and 3 but is higher for dataset_4, while the minimum y values vary more widely across the datasets. The maximum values are also the same for dataset_1, 2 and 3 but varies for y across the four data set, and although there are these variations, the correlation coefficients between x and y are almost the same for the four dataset, perhaps indicating a linear relationship between x and y. Due to these similarities and differences, it is difficult to make inferences with just these statistics.
+### Data set plot with ggplot:
 
-## Data set plot with ggplot:
-
-```{r}
+```         
 require(ggplot2) #ggplot2 package for plotting
 
 ggplot(anscombe_quartet, aes(x=x,y=y)) +  #plot dataset; default aesthetic mapping for x and y variables
@@ -51,14 +41,9 @@ ggplot(anscombe_quartet, aes(x=x,y=y)) +  #plot dataset; default aesthetic mappi
   facet_wrap(~dataset)  #arrange plot into seperate panels based on dataset
 ```
 
-\*Save the plot
+![Figure 1. Anscombe Quartet Plot](plots/anscombe_quartet.png)
 
-```{r}
-#save plot with specified format
-ggsave("anscombe_quartet.png", width = 20, height = 20, units = "cm")
-```
-
-## Question answers
+### Question answers:
 
 -   What do the plots tell us about the different datasets? The plots show how although there were similar summary statistics between the datasets, the distributions are actually quite different in a way that might be misleading without looking at the plots.
 
@@ -78,37 +63,31 @@ Dataset 4: The x-values are constant for this dataset besides an outlier point. 
 
 The plots and summary statistics show that although there are similar summary statistics with the datasets, their distributions are significantly different. This indicates how just looking at the summary statistics is not sufficient enough, and it is important to look at the data visualisation as well in order to get a sufficient idea of the underlying relationships of the data. In particular, this can be important for determining the most appropriate statistical analysis.
 
-# PROBLEM 2
+## PROBLEM 2
 
--   load in the datasaurus dataset
+Loaded the Data Set and Explored:
 
-```{r}
+```         
 #read dataset
 datasaurus_dozen = readRDS("dataset/datasaurus_dozen.rds")
-```
-
-## Dataset explored
-
-```{r}
-#show dataset structure
 str(datasaurus_dozen)
 ```
 
 -   how many rows and columns does the datasaurus_dozen file have? rows = 1,846 rows columns = 3 columns
 
-## Dataset Plot
+### Dataset Plot
 
-```{r}
+```         
 ggplot(datasaurus_dozen, aes(x = x, y = y)) + #plot dataset; default aesthetic mapping for x and y variables
   geom_point() +  #add points for each x, y point for scatter plot
   facet_wrap(~dataset)  #seperate plots to be based on each panel
 ```
 
-## Calculations of Summary Statistics:
+### Calculations of Summary Statistics:
 
 -   correlations and summary statistics for x and y in all datasets:
 
-```{r}
+```         
 datasaurus_dozen %>% 
   group_by(dataset) %>% 
   summarise(
@@ -122,11 +101,9 @@ datasaurus_dozen %>%
   )
 ```
 
-## Relationship Plot:
+### Relationship Plot: relationships between x and y in each dataset including the line of best fit.
 
--   Plot the relationships between x and y in each dataset including the line of best fit.
-
-```{r}
+```         
 require(ggplot2)  #ggplot2 pacakge for plotting
 
 ggplot(datasaurus_dozen, aes(x=x,y=y)) +  #plot dataset; default aesthetic mapping for x and y variables
@@ -135,13 +112,10 @@ ggplot(datasaurus_dozen, aes(x=x,y=y)) +  #plot dataset; default aesthetic mappi
   facet_wrap(~dataset)  #seperate points in different panels based on dataset
 ```
 
--   save the plot
+![Figure 2. Datasaurus Dozen Plot](plots/datasaurus_dozen.png)
 
-```{r}
-#save plot with specified format
-ggsave("../plots/datasaurus_dozen.png", width = 20, height = 20, units = "cm")
-```
+### Conclusions:
 
-## Conclusions:
+-   what can you draw for the plots and summary statistics?:
 
--   what can you draw for the plots and summary statistics? Although the summary statistics are very similar across all the data sets, the visual plots reveal diverse distributions between x and y despite the similar correlation coefficients. Particularly, the line of best fit can be misleading as they are based on linear regression, the datasets with a clear non-linear pattern like the star dataset is not represented sufficiently with the best fit line. Additionally, datasets like the h_lines and v_lines suggest that the homoscedasticity is not consistent violating one of the assumptions of a linear regression. Overall, while the summary statistics indicate a consistent mean for x and y and similar correlation coefficients across all the datasets, the distribution and line of best fit unable to capture the whole scope of the datasets indicates different analytical approaches are important to accurately capture the data.
+    Although the summary statistics are very similar across all the data sets, the visual plots reveal diverse distributions between x and y despite the similar correlation coefficients. Particularly, the line of best fit can be misleading as they are based on linear regression, the datasets with a clear non-linear pattern like the star dataset is not represented sufficiently with the best fit line. Additionally, datasets like the h_lines and v_lines suggest that the homoscedasticity is not consistent violating one of the assumptions of a linear regression. Overall, while the summary statistics indicate a consistent mean for x and y and similar correlation coefficients across all the datasets, the distribution and line of best fit unable to capture the whole scope of the datasets indicates different analytical approaches are important to accurately capture the data.
